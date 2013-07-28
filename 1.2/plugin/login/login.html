@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<link href="/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+		<link href="/bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet" />
+		<link href="/css/login.css" rel="stylesheet" />
+		<script language="Javascript" type="text/javascript" src="/js/jQuery2.0.2.min.js"></script>
+		<script language="Javascript" type="text/javascript" src="/bootstrap/js/bootstrap.min.js"></script>
+		<script language="Javascript" type="text/javascript" src="/js/md5.js"></script>
+	</head>
+
+	<body>
+		
+		<div class="l_left">
+		</div>
+		<div class="l_right">
+			<div class="container" style="width: 78%;margin-top: 126px;position: relative;">
+				<div class="l_form-header">
+					<div style="float: left;"><h1>Login</h1></div>
+				</div>
+				<div class="l_form-body">
+					<!--<form class="form-horizontal" id="l_form" action="/login" method="post">-->
+					<div class="form-horizontal" id="l_form" >
+						<div class="control-group">
+							<label class="control-label" for="l_stu_no">Student No</label>
+							<div class="controls">
+								<input type="text" id="l_u_email" placeholder="Student No" />
+							</div>
+						</div>
+						<div class="control-group">
+							<label class="control-label" for="l_u_pwd">Password</label>
+							<div class="controls">
+								<input type="password" id="l_u_pwd" placeholder="Password" />
+							</div>
+						</div>
+						<div class="control-group">
+							<label class="control-label" for="l_u_verification">Verification</label>
+							<div class="controls" id="l_u_verification_html">
+								<a href="#" id="l_u_verification_click">Click Here And Gain Verfication Code</a>
+								<!--<input type="password" id="l_u_pwd" placeholder="Password" />-->
+							</div>
+						</div>
+						<div class="control-group">
+							<div class="controls">
+								<!--<input type="submit" name="l_submit" class="btn" value="Sign in" />-->
+								<button type="button" id="l_submit" class="btn">Sign in</button>
+							</div>
+						</div>
+
+					</div>
+				</div>
+				<div class="alert" id="l_alert" style="display: none;margin-top: 4px;margin-left: 18px; box-shadow: 0 1px 1px;">
+					<button type="button" class="close" data-dismiss="alert">&times;</button>
+					<p id="l_err">error</p>
+				
+				</div>
+			</div>
+		</div>
+
+		<script language="Javascript" type="text/javascript" src="/js/login.js"></script>
+
+
+	</body>
+
+</html>

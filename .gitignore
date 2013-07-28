@@ -1,0 +1,7 @@
+# temp file
+.*.swo
+.*.swp
+*~
+
+# ignore directory
+test/

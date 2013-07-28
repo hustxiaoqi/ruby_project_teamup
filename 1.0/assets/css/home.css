@@ -1,0 +1,31 @@
+.h_header{
+	background: url('/image/home/header.png') repeat-x 0 -20px;
+	height: 72px;
+}
+.h_header-logo{
+	width: 900px;
+	margin: 0 auto;
+}
+.h_header-logo-text{
+	color: white
+}
+.h_header-logo-other{
+	width: 110px;
+	float: right;
+	margin-top: 30px;
+}
+.h_main{
+	background-color: #f8f8f8;
+	margin-top: 2px;
+}
+.h_contenter{
+	width: 900px;
+	height: 800px;
+	margin: 0 auto;
+}
+.h_contenter-main{
+	padding-top: 290px;
+}
+#content-timeline{
+	opacity: 1;
+}
