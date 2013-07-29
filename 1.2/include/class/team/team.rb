@@ -20,7 +20,7 @@ module Ash
 			attr_accessor :id, :introduction, :projects, :created_time, :creator_id, :disbanded_time, :active, :members, :name, :profile, :uuid
 			def initialize(args = {})
 				raise TeamException, "Team initialize argument error" unless args.is_a? Hash
-				args.each { |key, value| instance_variable_set("@#{key}", value)} unless args.empty?
+				args.map { |key, value| instance_variable_set("@#{key}", value)} unless args.empty?
 			end
 		end
 
@@ -28,7 +28,7 @@ module Ash
 			attr_accessor :id
 			def initialize(args = {})
 				raise TeamException, "TeamCProjects initialize argument error" unless args.is_a? Hash
-				args.each { |key, value| instance_variable_set("@#{key}", value)} unless args.empty?
+				args.map { |key, value| instance_variable_set("@#{key}", value)} unless args.empty?
 			end
 		end
 
@@ -36,7 +36,7 @@ module Ash
 			attr_accessor :id, :authority, :join_time, :quit_time, :frozen
 			def initialize(args = {})
 				raise TeamException, "TeamPMembers initialize argument error" unless args.is_a? Hash
-				args.each { |key, value| instance_variable_set("@#{key}", value)} unless args.empty?
+				args.map { |key, value| instance_variable_set("@#{key}", value)} unless args.empty?
 			end
 		end
 
@@ -47,7 +47,7 @@ module Ash
 			def initialize(teams)
 				@team = []
 				teams = [teams] unless teams.is_a? Array
-				teams.each do |team|
+				teams.map do |team|
 					raise TeamException, "MemberResult initialize argument error" unless team.is_a? Hash
 					@team << Team.new(
 						id: team['_id'].to_s || nil,
@@ -70,7 +70,7 @@ module Ash
 			def init_projects(projects)
 				projects = [projects] unless projects.is_a? Array
 				project_arr = []
-				projects.each do |project|
+				projects.map do |project|
 					raise TeamException, "MemberResult initialize argument error" unless project.is_a? Hash
 					project_arr << TeamCProjects.new(
 						id: project['projectId'] || nil,
@@ -86,7 +86,7 @@ module Ash
 			def init_members(members)
 				members = [members] unless members.is_a? Array
 				member_arr = []
-				members.each do |member|
+				members.map do |member|
 					raise TeamException, "MemberResult initialize argument error" unless member.is_a? Hash
 					member_arr << TeamPMembers.new(
 						id: member['memberId'] || nil,

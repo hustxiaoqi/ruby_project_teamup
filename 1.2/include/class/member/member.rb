@@ -22,7 +22,7 @@ module Ash
 			attr_accessor :id, :introduction, :email, :active, :frozen, :name, :profile, :uuid, :teams, :password
 			def initialize(args = {})
 				raise TeamException, "Member initialize argument error" unless args.is_a? Hash
-				args.each { |key, value| instance_variable_set("@#{key}", value)} unless args.empty?
+				args.map { |key, value| instance_variable_set("@#{key}", value)} unless args.empty?
 			end
 		end
 
@@ -30,7 +30,7 @@ module Ash
 			attr_accessor :id, :authority, :join_time, :quit_time, :being_used
 			def initialize(args = {})
 				raise TeamException, "MemberPTeams initialize argument error" unless args.is_a? Hash
-				args.each { |key, value| instance_variable_set("@#{key}", value)} unless args.empty?
+				args.map { |key, value| instance_variable_set("@#{key}", value)} unless args.empty?
 			end
 		end
 
@@ -41,7 +41,7 @@ module Ash
 			def initialize(members)
 				@member = []
 				members = [members] unless members.is_a? Array
-				members.each do |member|
+				members.map do |member|
 					raise MemberException, "MemberResult initialize argument error" unless member.is_a? Hash
 					@member << Member.new(
 						id: member['_id'].to_s || nil,
@@ -62,7 +62,7 @@ module Ash
 			def init_teams(teams)
 				teams = [teams] unless teams.is_a? Array
 				team_arr = []
-				teams.each do |team|
+				teams.map do |team|
 					raise MemberException, "MemberResult initialize argument error" unless team.is_a? Hash
 					team_arr << MemberPTeams.new(
 						id: team['teamId'] || nil,
