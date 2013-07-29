@@ -19,7 +19,7 @@ module Ash
 	module ExtraDB
 
 		class Member
-			attr_accessor :id, :introduction, :email, :active, :name, :profile, :uuid, :teams, :password
+			attr_accessor :id, :introduction, :email, :active, :frozen, :name, :profile, :uuid, :teams, :password
 			def initialize(*args)
 				return if args.empty?
 				raise MemberException, "Member initialize argument error" unless args.length == 1
@@ -50,6 +50,7 @@ module Ash
 						introduction: member.has_key?('briefIntroduction') ? member['briefIntroduction'] : nil,
 						email: member.has_key?('email') ? member['email'] : nil,
 						active: member.has_key?('isActive') ? member['isActive'] : nil,
+						frozen: member.has_key?('isFrozen') ? member['isFrozen'] : nil,
 						name: member.has_key?('memberName') ? member['memberName'] : nil,
 						profile: member.has_key?('memberProfile') ? member['memberProfile'] : nil,
 						uuid: member.has_key?('memberUUId') ? member['memberUUId'] : nil,

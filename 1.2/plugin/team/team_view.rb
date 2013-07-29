@@ -14,7 +14,7 @@ module Ash
 				super(Ash::ModuleApp::TeamControl.new)
 			end
 			
-			def default; "hello"; end
+			#def default; "hello"; end
 
 			def view_ready_teams(*args); @api.ct_ready_teams(*args); end
 
