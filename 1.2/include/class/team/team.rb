@@ -53,17 +53,17 @@ module Ash
 				teams.each do |team|
 					raise TeamException, "MemberResult initialize argument error" unless team.is_a? Hash
 					@team << Team.new(
-						id: team.has_key?('_id') ? team['_id'].to_s : nil,
-						introduction: team.has_key?('briefIntroduction') ? team['briefIntroduction'] : nil,
+						id: team['_id'].to_s || nil,
+						introduction: team['briefIntroduction'] || nil,
 						projects: team.has_key?('createdProjects') ? self.init_projects(team['createdProjects']) : nil,
-						created_time: team.has_key?('createdTime') ? team['createdTime'] : nil,
-						creator_id: team.has_key?('creatorUid') ? team['creatorUid'] : nil,
-						disbanded_time: team.has_key?('disbandedTime') ? team['disbandedTime'] : nil,
-						active: team.has_key?('isActive') ? team['isActive'].to_s : nil,
+						created_time: team['createdTime'] || nil,
+						creator_id: team['creatorUid'] || nil,
+						disbanded_time: team['disbandedTime'] || nil,
+						active: team['isActive'].to_s || nil,
 						members: team.has_key?('participatingMembers') ? self.init_members(team['participatingMembers']) : nil,
-						name: team.has_key?('teamName') ? team['teamName'] : nil,
-						profile: team.has_key?('teamProfile') ? team['teamProfile'] : nil,
-						uuid: team.has_key?('teamUUId') ? team['teamUUId'] : nil,
+						name: team['teamName'] || nil,
+						profile: team['teamProfile'] || nil,
+						uuid: team['teamUUId'] || nil,
 					)
 				end
 				@team = @team.first  if @team.length == 1
@@ -76,11 +76,11 @@ module Ash
 				projects.each do |project|
 					raise TeamException, "MemberResult initialize argument error" unless project.is_a? Hash
 					project_arr << TeamCProjects.new(
-						id: project.has_key?('projectId') ? project['projectId'] : nil,
-						#authority: project.has_key?('projectAuthority') ? project['projectAuthority'] : nil,
-						#join_time: project.has_key?('projectJoinTime') ? project['projectJoinTime'] : nil,
-						#quit_time: project.has_key?('projectQuitTime') ? project['projectQuitTime'] : nil,
-						#being_used: project.has_key?('beingUsed') ? project['beingUsed'] : nil,
+						id: project['projectId'] || nil,
+						#authority: project['projectAuthority'] || nil,
+						#join_time: project['projectJoinTime'] || nil,
+						#quit_time: project['projectQuitTime'] || nil,
+						#being_used: project['beingUsed'] || nil,
 					)
 				end
 				project_arr
@@ -92,11 +92,11 @@ module Ash
 				members.each do |member|
 					raise TeamException, "MemberResult initialize argument error" unless member.is_a? Hash
 					member_arr << TeamPMembers.new(
-						id: member.has_key?('memberId') ? member['memberId'] : nil,
-						authority: member.has_key?('memberAuthority') ? member['memberAuthority'] : nil,
-						join_time: member.has_key?('memberJoinTime') ? member['memberJoinTime'] : nil,
-						quit_time: member.has_key?('memberQuitTime') ? member['memberQuitTime'] : nil,
-						frozen: member.has_key?('isFrozen') ? member['isFrozen'] : nil,
+						id: member['memberId'] || nil,
+						authority: member['memberAuthority'] || nil,
+						join_time: member['memberJoinTime'] || nil,
+						quit_time: member['memberQuitTime'] || nil,
+						frozen: member['isFrozen'] || nil,
 					)
 				end
 				member_arr
