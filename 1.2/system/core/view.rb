@@ -26,7 +26,7 @@ module Ash
 				self.integrate_xhc_file(file_name, module_name)
 			end
 
-			def integrate_xhc_file(file_name, module_name = '')
+			def integrate_xhr_file(file_name, module_name = '')
 				if Object.const_defined? :ASH_DEBUG
 					file_path = "#{MAIN_PATH}plugin/#{module_name}/#{file_name}"
 				else

@@ -1,7 +1,6 @@
 #coding: UTF-8
 
 require 'sinatra'
-require 'pp'
 
 get '/team/:project/' do
 
@@ -15,7 +14,7 @@ get '/team/:project' do
 	pp session
   Ash::UtilsModules.load_module_files 'project'
 	Ash::UtilsModules.display_module_outline request.dup
-	Ash::ModuleApp::CViewProject.new.default(session[:ash_uid], session[:ash_ttid], session[:ash_tuuid], session[:ash_tauth])
+	Ash::ModuleApp::ProjectView.new.default(session[:ash_uid], session[:ash_ttid], session[:ash_tuuid], session[:ash_tauth])
 end
 
 get '/team/:project/newproject' do

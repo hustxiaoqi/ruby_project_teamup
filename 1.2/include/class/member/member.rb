@@ -19,7 +19,7 @@ module Ash
 	module ExtraDB
 
 		class Member
-			attr_accessor :id, :introduction, :email, :active, :name, :profile, :uuid, :teams, :password
+			attr_accessor :id, :introduction, :email, :active, :frozen, :name, :profile, :uuid, :teams, :password
 			def initialize(*args)
 				return if args.empty?
 				raise MemberException, "Member initialize argument error" unless args.length == 1
