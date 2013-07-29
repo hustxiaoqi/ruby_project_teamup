@@ -46,15 +46,15 @@ module Ash
 				members.each do |member|
 					raise MemberException, "MemberResult initialize argument error" unless member.is_a? Hash
 					@member << Member.new(
-						id: member.has_key?('_id') ? member['_id'].to_s : nil,
-						introduction: member.has_key?('briefIntroduction') ? member['briefIntroduction'] : nil,
-						email: member.has_key?('email') ? member['email'] : nil,
-						active: member.has_key?('isActive') ? member['isActive'] : nil,
-						name: member.has_key?('memberName') ? member['memberName'] : nil,
-						profile: member.has_key?('memberProfile') ? member['memberProfile'] : nil,
-						uuid: member.has_key?('memberUUId') ? member['memberUUId'] : nil,
+						id: member['_id'].to_s || nil,
+						introduction: member['briefIntroduction'] || nil,
+						email: member['email'] || nil,
+						active: member['isActive'] || nil,
+						name: member['memberName'] || nil,
+						profile: member['memberProfile'] || nil,
+						uuid: member['memberUUId'] || nil,
 						teams: member.has_key?('participatingTeams') ? self.init_teams(member['participatingTeams']) : nil,
-						password: member.has_key?('passwordMD5') ? member['passwordMD5'] : nil,
+						password: member['passwordMD5'] || nil,
 					)
 				end
 				@member = @member.first  if @member.length == 1
@@ -67,11 +67,11 @@ module Ash
 				teams.each do |team|
 					raise MemberException, "MemberResult initialize argument error" unless team.is_a? Hash
 					team_arr << MemberPTeams.new(
-						id: team.has_key?('teamId') ? team['teamId'] : nil,
-						authority: team.has_key?('teamAuthority') ? team['teamAuthority'] : nil,
-						join_time: team.has_key?('teamJoinTime') ? team['teamJoinTime'] : nil,
-						quit_time: team.has_key?('teamQuitTime') ? team['teamQuitTime'] : nil,
-						being_used: team.has_key?('beingUsed') ? team['beingUsed'] : nil,
+						id: team['teamId'] || nil,
+						authority: team['teamAuthority'] || nil,
+						join_time: team['teamJoinTime'] || nil,
+						quit_time: team['teamQuitTime'] || nil,
+						being_used: team['beingUsed'] || nil,
 					)
 				end
 				team_arr
