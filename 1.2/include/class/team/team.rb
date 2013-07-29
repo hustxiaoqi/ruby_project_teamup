@@ -18,28 +18,25 @@ module Ash
 
 		class Team
 			attr_accessor :id, :introduction, :projects, :created_time, :creator_id, :disbanded_time, :active, :members, :name, :profile, :uuid
-			def initialize(*args)
-				return if args.empty?
-				raise TeamException, "Member initialize argument error" unless args.length == 1
-				args.first.each { |key, value| eval("@#{key}=value")}
+			def initialize(args = {})
+				raise TeamException, "Team initialize argument error" unless args.is_a? Hash
+				args.each { |key, value| instance_variable_set("@#{key}", value)} unless args.empty?
 			end
 		end
 
 		class TeamCProjects
 			attr_accessor :id
-			def initialize(*args)
-				return if args.empty?
-				raise TeamException, "MemberPTeams initialize argument error" unless args.length == 1
-				args.first.each { |key, value| eval("@#{key}=value")}
+			def initialize(args = {})
+				raise TeamException, "TeamCProjects initialize argument error" unless args.is_a? Hash
+				args.each { |key, value| instance_variable_set("@#{key}", value)} unless args.empty?
 			end
 		end
 
 		class TeamPMembers
 			attr_accessor :id, :authority, :join_time, :quit_time, :frozen
-			def initialize(*args)
-				return if args.empty?
-				raise TeamException, "MemberPTeams initialize argument error" unless args.length == 1
-				args.first.each { |key, value| eval("@#{key}=value")}
+			def initialize(args = {})
+				raise TeamException, "TeamPMembers initialize argument error" unless args.is_a? Hash
+				args.each { |key, value| instance_variable_set("@#{key}", value)} unless args.empty?
 			end
 		end
 

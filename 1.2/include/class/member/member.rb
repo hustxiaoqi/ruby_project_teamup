@@ -20,19 +20,17 @@ module Ash
 
 		class Member
 			attr_accessor :id, :introduction, :email, :active, :frozen, :name, :profile, :uuid, :teams, :password
-			def initialize(*args)
-				return if args.empty?
-				raise MemberException, "Member initialize argument error" unless args.length == 1
-				args.first.each { |key, value| eval("@#{key}=value")}
+			def initialize(args = {})
+				raise TeamException, "Member initialize argument error" unless args.is_a? Hash
+				args.each { |key, value| instance_variable_set("@#{key}", value)} unless args.empty?
 			end
 		end
 
 		class MemberPTeams
 			attr_accessor :id, :authority, :join_time, :quit_time, :being_used
-			def initialize(*args)
-				return if args.empty?
-				raise MemberException, "MemberPTeams initialize argument error" unless args.length == 1
-				args.first.each { |key, value| eval("@#{key}=value")}
+			def initialize(args = {})
+				raise TeamException, "MemberPTeams initialize argument error" unless args.is_a? Hash
+				args.each { |key, value| instance_variable_set("@#{key}", value)} unless args.empty?
 			end
 		end
 
