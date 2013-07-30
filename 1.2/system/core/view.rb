@@ -23,7 +23,7 @@ module Ash
 
 			public
 			def load_static_file(file_name, module_name = '')
-				self.integrate_xhc_file(file_name, module_name)
+				self.integrate_xhr_file(file_name, module_name)
 			end
 
 			def integrate_xhr_file(file_name, module_name = '')
