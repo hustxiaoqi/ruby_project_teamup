@@ -18,5 +18,10 @@ module Ash
 			config_files.each {|file| require file}
 		end
 
+		def self.format_member_profile_path(profile)
+			base_path = "/image/user_gallery/"
+			profile.empty? ? (base_path + Ash::Disposition::COMMON_MEMBER_PHOTO_DEFAULT_FILE) : (base_path + profile)
+		end
+
 	end
 end

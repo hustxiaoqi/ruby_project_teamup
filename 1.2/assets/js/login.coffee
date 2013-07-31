@@ -36,7 +36,7 @@ $(document).ready ->
 		#}
 		#return
 
-	$("#l_u_verification_click").bind('click', verification_change)
+	$("#l_u_verif_a").bind('click', verification_change)
 	$("#l_submit").click ->
 		l_u_email= $.trim $("#l_u_email").val()
 		l_u_pwd = $.trim $("#l_u_pwd").val()

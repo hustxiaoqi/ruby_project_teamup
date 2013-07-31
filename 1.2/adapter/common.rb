@@ -11,5 +11,14 @@ set :session_secret, ENV["SESSION_KEY"] || Digest::MD5.hexdigest(ENV['ASH_MONGOD
 enable :sessions
 
 before do
-	session[:ash_uid] ||= 0
+	unless session[:ash_uid].nil?
+		session[:ash_uid] = 0 unless Ash::ExtraDB::MemberHelper.new.member?(session[:ash_uid])
+		if Object.const_defined? :ASH_STRICT_MODE
+			unless session[:ash_ttid].nil? and session[:ash_tuuid].nil?
+				session[:ash_uid] = 0 unless Ash::ExtraDB::TeamHelper.new.team?(session[:ash_ttid], session[:ash_tuuid])
+			end
+		end
+	else
+		session[:ash_uid] = 0
+	end
 end

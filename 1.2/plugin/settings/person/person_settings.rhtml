@@ -6,9 +6,16 @@
 					<!--<form class="form-horizontal" id="l_form" action="/login" method="post">-->
 					<div class="form-horizontal" id="l_form" >
 						<div class="control-group">
+							<label class="control-label">Photo</label>
+							<div class="controls">
+								<img src="<%=photo%>"/>
+								<input type="file" title="upload file" />
+							</div>
+						</div>
+						<div class="control-group">
 							<label class="control-label">Email</label>
 							<div class="controls">
-								<input type="text" class="span3 disabledInput" placeholder="59@qq.com" disabled/>
+								<input type="text" class="span3 disabledInput" placeholder="<%=email%>" disabled/>
 							</div>
 						</div>
 						<div class="control-group">
@@ -32,7 +39,7 @@
 						<div class="control-group">
 							<div class="controls">
 								<button type="button" id="s_submit" class="btn">Submit</button>
-								<button type="button" id="s_submit" class="btn btn-link">Cancel</button>
+								<button type="button" id="s_cancel" class="btn btn-link">Cancel</button>
 							</div>
 						</div>
 
@@ -41,3 +48,4 @@
 			</div>
 			<div class="span4"></div>
 		</div>
+		<script language="javascript" type="text/javascript" src="/js/person_settings.js"></script>

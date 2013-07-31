@@ -111,17 +111,19 @@ module Ash
 				@team = Team.new
 			end
 
-			def find_all_by_tid
+			def find_all_by_tid(tid = nil)
+				@team.id = tid unless tid.nil?
 				raise TeamException, "tid error" if @team.id.nil? or !BSON::ObjectId.legal?(@team.id)
 				result = @helper.find_one({_id: BSON::ObjectId(@team.id)})
 				return result if result.nil?
 				TeamResult.new(result)
 			end
 
-			def team?
+			def team?(tid = nil, uuid = nil)
+				@team.id, @team.uuid = tid, uuid unless tid.nil? and uuid.nil?
 				raise TeamException, "tid error" if @team.id.nil? or !BSON::ObjectId.legal?(@team.id)
 				raise TeamException, "uuid error" if @team.uuid.nil? or !Ash::UtilsBase.uuid? @team.uuid
-				@helper.find_one({_id: BSON::ObjectId(@team.id), teamUUId: @team.uuid}) != nil
+				!@helper.find_one({_id: BSON::ObjectId(@team.id), teamUUId: @team.uuid}).nil?
 			end
 		end
 

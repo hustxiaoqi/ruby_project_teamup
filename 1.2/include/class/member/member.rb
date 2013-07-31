@@ -87,14 +87,22 @@ module Ash
 				@member = Member.new
 			end
 
-			def find_all_by_email
+			def member?(mid = nil)
+				@member.id = mid unless mid.nil?
+				raise MemberException, "uid error" if @member.id.nil? or !BSON::ObjectId.legal?(@member.id)
+				!@helper.find_one({_id: BSON::ObjectId(@member.id)}).nil?
+			end
+
+			def find_all_by_email(email = nil)
+				@member.email = email unless email.nil?
 				raise MemberException, "email error" if @member.email.nil? or !Ash::UtilsBase.email?(@member.email)
 				result = @helper.find_one({email: @member.email})
 				return result if result.nil?
 				MemberResult.new(result)
 			end
 
-			def find_all_by_uid
+			def find_all_by_uid(uid = nil)
+				@member.id = uid unless uid.nil?
 				raise MemberException, "uid error" if @member.id.nil? or !BSON::ObjectId.legal?(@member.id)
 				result = @helper.find_one({_id: BSON::ObjectId(@member.id)})
 				return result if result.nil?

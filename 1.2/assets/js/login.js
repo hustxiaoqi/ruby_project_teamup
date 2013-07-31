@@ -21,7 +21,7 @@ verification_change = function() {
 };
 
 $(document).ready(function() {
-  $("#l_u_verification_click").bind('click', verification_change);
+  $("#l_u_verif_a").bind('click', verification_change);
   $("#l_submit").click(function() {
     var l_u_email, l_u_pwd, l_u_token;
     l_u_email = $.trim($("#l_u_email").val());

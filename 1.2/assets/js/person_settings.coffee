@@ -1,5 +1,5 @@
 $(document).ready ->
-	$("#l_submit").click ->
+	$("#s_submit").click ->
 		s_p_m_name= $.trim $("#s_p_m_name").val()
 		s_p_m_brief= $.trim $("#s_p_m_brief").val()
 		

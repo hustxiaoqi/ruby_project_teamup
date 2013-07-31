@@ -17,6 +17,9 @@ Ash::UtilsCommon.load_routing_conf_files
 
 require "#{SYS_DIR_COMMON}utils_module.rb"
 require "#{SYS_DIR_COMMON}utils_base.rb"
+
+require "#{MAIN_DIR_INCLUDE_CLASS}member#{File::SEPARATOR}member.rb"
+require "#{MAIN_DIR_INCLUDE_CLASS}team#{File::SEPARATOR}team.rb"
 #require "#{SYS_DIR_PACKAGE}db#{File::SEPARATOR}_init.rb"
 
 #Ash::Disposition.constants.each do |cont|
