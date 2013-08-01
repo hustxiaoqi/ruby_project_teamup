@@ -8,8 +8,21 @@
 						<div class="control-group">
 							<label class="control-label">Photo</label>
 							<div class="controls">
-								<img src="<%=photo%>"/>
-								<input type="file" title="upload file" />
+								<form action="/settings/person/photo" method="post" enctype="multipart/form-data">
+									<div class="fileupload fileupload-exists" data-provides="fileupload">
+										<div class="fileupload-preview fileupload-exists thumbnail" style="width: 100px; height: 100px;">
+											<img src="<%=photo%>"/>
+										</div>
+										<div>
+											<span class="btn btn-file">
+												<span class="fileupload-exists">Change</span>
+												<input type="file"/>
+											</span>
+											<!--<a href="#" class="btn fileupload-exists" data-dismiss="fileupload">Remove</a>-->
+										</div>
+									</div>
+									<input type="submit" name="submit" value="submit"/>
+								</form>
 							</div>
 						</div>
 						<div class="control-group">
@@ -21,13 +34,13 @@
 						<div class="control-group">
 							<label class="control-label" for="s_p_m_name">Username</label>
 							<div class="controls">
-								<input type="text" class="span3" id="s_p_m_name" placeholder="username" required/>
+								<input type="text" class="span3" <%unless result.first.empty?%>value="<%=result.first%>"<%end%> id="s_p_m_name" placeholder="username" required/>
 							</div>
 						</div>
 						<div class="control-group">
 							<label class="control-label" for="s_p_m_brief">brief Introduction</label>
 							<div class="controls">
-								<textarea class="span4" id="s_p_m_brief" placeholder="brief Introduction" rows="4" style="resize: none;"></textarea>
+								<textarea class="span4" id="s_p_m_brief" placeholder="brief Introduction" rows="4" style="resize: none;"><% unless result[1].empty?%><%=result[1]%><%end%></textarea>
 							</div>
 						</div>
 						<div class="control-group">

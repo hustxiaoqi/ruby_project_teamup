@@ -16,16 +16,16 @@ require 'erb'
 module Ash
 	module ModuleApp
 		
-		class PersonSettingsView < Ash::ModuleApp::View
+		class PersonSettingsView < ModuleApp::View
 			
 			def initialize
-				super(Ash::ModuleApp::PersonSettingControl.new)
+				super(ModuleApp::PersonSettingsControl.new)
 			end
 			
 			def default(uid, email, xhr)
-				photo = Ash::ExtraDB::PersonSMHelper.new.find_member_profile(uid)
-				return Ash::UtilsBase.integrate_unable_eresult if photo.nil?
-				photo = Ash::UtilsCommon.format_member_profile_path(photo)
+				result = ExtraDB::PersonSMHelper.new.find_member_briefs(uid)
+				return UtilsBase.integrate_unable_eresult if result.nil?
+				photo = UtilsCommon.format_member_profile_path(result.last)
 				if Object.const_defined? :ASH_DEBUG
 					body = ERB.new(self.load_xhr_html('person_settings.rhtml', 'settings/person/')).result(binding())
 				else
@@ -41,11 +41,23 @@ module Ash
 			def view_verify_ps_photo(*args)
 				@api.ct_verify_ps_photo(*args)
 			end
-			#def view_verify_register(*args); @api.ct_verify_register(*args); end
 
-			#def view_random_image(*args); @api.ct_random_image(*args); end
+			#==========>
+			#alter password
 
-			#def view_onverify_register(*args); @api.ct_onverify_register(*args); end
+			def view_alter_password(xhr)
+				#if Object.const_defined? :ASH_DEBUG
+					#body = self.load_xhr_html('alter_password.html', 'settings/person/')
+				#else
+					#body = self.load_xhr_html('alter_password.html')
+				#end
+				#xhr ? body : self.load_head_html + body + self.load_bottom_html
+				self.load_static_file('alter_password.html')
+			end
+
+			def view_verify_altpwd(*args)
+				@api.ct_verify_altpwd(*args)
+			end
 		end
 	end
 end

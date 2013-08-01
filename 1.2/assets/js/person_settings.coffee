@@ -1,4 +1,10 @@
 $(document).ready ->
+
+	$('.fileupload').fileupload({
+		uploadtype: 'image'
+		name: 's_p_m_photo'
+	})
+
 	$("#s_submit").click ->
 		s_p_m_name= $.trim $("#s_p_m_name").val()
 		s_p_m_brief= $.trim $("#s_p_m_brief").val()

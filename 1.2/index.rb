@@ -5,7 +5,11 @@ require 'sinatra'
 
 ACCESS_ERROR = true unless Object.const_defined? :ACCESS_ERROR
 
-ASH_STRICT_MODE = true unless Object.const_defined? :ASH_STRICT_MODE
+ASH_MODE_CLIENT = 7
+ASH_MODE_DEV = 77
+
+# develpement mode
+ASH_MODE = ASH_MODE_DEV
 
 MAIN_PATH = File.expand_path(File.dirname(__FILE__)) << File::SEPARATOR
 Dir.chdir MAIN_PATH

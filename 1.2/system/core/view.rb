@@ -10,7 +10,6 @@ end
 
 include Ash::Disposition
 
-
 module Ash
 	module ModuleApp
 
