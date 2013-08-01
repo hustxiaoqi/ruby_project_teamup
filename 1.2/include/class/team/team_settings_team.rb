@@ -11,7 +11,7 @@ end
 module Ash
 	module ExtraDB
 
-		class ProjectTHelper
+		class TeamSTHelper
 
 			attr_reader :team_helper
 
@@ -19,23 +19,17 @@ module Ash
 				@team_helper = TeamHelper.new
 				@team, @db_helper = @team_helper.team, @team_helper.helper
 			end
-
+			
 			public
-			def init_team(tid, tuuid)
-				@team.id, @team.uuid = tid, uuid
+			def init_team(tid)
+				@team.id = tid
 				self
 			end
 
-			def governor?(auth)
-				auth == Ash::Disposition::COMMON_TEAM_CREATE_AUTHORITY or auth == Ash::Disposition::COMMON_TEAM_MANAGE_AUTHORITY
+			def find_team_briefs
+				result = @team_helper.find_all_by_tid(@team.id)
+				result.nil? ? nil : result.team
 			end
-
-			def find_all_projects
-				result = @team_helper.find_all_by_tid
-				return result if result.nil?
-				result.team.projects
-			end
-
 		end
 	end
 end

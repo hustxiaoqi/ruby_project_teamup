@@ -122,9 +122,16 @@ module Ash
 			def team?(tid = nil, uuid = nil)
 				@team.id, @team.uuid = tid, uuid unless tid.nil? and uuid.nil?
 				raise TeamException, "tid error" if @team.id.nil? or !BSON::ObjectId.legal?(@team.id)
-				raise TeamException, "uuid error" if @team.uuid.nil? or !Ash::UtilsBase.uuid? @team.uuid
+				raise TeamException, "uuid error" if @team.uuid.nil? or !UtilsBase.uuid? @team.uuid
 				!@helper.find_one({_id: BSON::ObjectId(@team.id), teamUUId: @team.uuid}).nil?
 			end
+
+			class << self
+				def governor?(auth)
+					auth == COMMON_TEAM_CREATE_AUTHORITY.to_s or auth == COMMON_TEAM_MANAGE_AUTHORITY.to_s
+				end
+			end
+		
 		end
 
 		class TeamException < StandardError; end

@@ -28,6 +28,11 @@ module Ash
 			Digest::MD5.hexdigest(pwd)
 		end
 
+		def self.format_time(time = '')
+			raise ArgumentError, "format_time argument error" if time.empty?
+			Time.at(time.to_i).utc.strftime("%F %R").to_s
+		end
+
 		def self.arr_password?(*pwds)
 			raise ArgumentError, "arr_password argument error" if pwds.empty?
 			pwds.each {|pwd| return false unless self.password?(pwd)}
