@@ -14,8 +14,7 @@ verification_change = function() {
     async: true,
     type: 'GET',
     data: {
-      'l_r_email': l_u_email,
-      'l_r_time': new Date().getTime()
+      'l_r_email': l_u_email
     }
   });
 };
@@ -41,8 +40,7 @@ $(document).ready(function() {
       data: {
         'l_u_email': l_u_email,
         'l_u_pwd': md5(l_u_pwd),
-        'l_u_token': l_u_token,
-        'l_u_time': new Date().getTime()
+        'l_u_token': l_u_token
       }
     });
     return true;

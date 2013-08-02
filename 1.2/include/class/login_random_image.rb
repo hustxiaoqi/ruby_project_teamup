@@ -7,25 +7,25 @@ module Ash
 
 		class LoginRImgHelper
 
-			def initialize
+			def initialize(email)
 				@helper = Ash::DB::DBHelper.new('LoginRandomImage')
+				@email = email
 			end
 
 			public
-			def insert(email, start_time, text, path)
-				@helper.insert({:email => email, :startTime => start_time, :token => text, :path => path})
+			def insert(start_time, text, path)
+				@helper.insert({:email => @email, :startTime => start_time, :token => text, :path => path})
 				self
 			end
 
-			def find_by_email(email)
-				final, result = {}, @helper.find_one({:email => email}, 'startTime', 'token', 'path')
-				return result if result == nil
-				final['start_time'], final['old_token'], final['image_path'] = result['startTime'], result['token'], result['path']
-				final
+			def find_by_email
+				result = @helper.find_one({:email => @email}, 'startTime', 'token', 'path')
+				result == nil and return
+				Struct.new(:time, :token, :path).new(result['startTime'], result['token'], result['path'])
 			end
 
-			def remove_by_email(email)
-				@helper.remove({:email => email})
+			def remove_by_email
+				@helper.remove({:email => @email})
 				self
 		 	end
 		end

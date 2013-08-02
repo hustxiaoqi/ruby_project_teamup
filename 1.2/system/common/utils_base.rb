@@ -4,7 +4,6 @@ exit unless Object.const_defined? :ACCESS_ERROR
 
 require 'set'
 require 'json'
-require 'fileutils'
 require 'RMagick'
 require 'digest'
 
@@ -39,24 +38,28 @@ module Ash
 			true
 		end
 
-		def self.integrate_result(status, type, info)
+		def self.inte_basic_info(args)
+			args.to_json
+		end
+
+		def self.inte_info(status, type, info)
 			{status: status, type: type, info: info}.to_json
 		end
 
-		def self.integrate_err_result(type, info)
-			self.integrate_result(false, type, info)
+		def self.inte_err_info(type, info)
+			self.inte_info(false, type, info)
 		end
 
-		def self.integrate_unable_result
-			self.integrate_result(false, Disposition::COMMON_PAGE_ERROR_UNABLE, Disposition::COMMON_PAGE_ERROR_UNABLE_INFO)
+		def self.inte_bigerr_info
+			self.inte_info(false, Disposition::COMMON_PAGE_ERROR_UNABLE, Disposition::COMMON_PAGE_ERROR_UNABLE_INFO)
 		end
 
-		def self.integrate_success_result
-			self.integrate_result(true, Disposition::COMMON_PAGE_SUCCESS, Disposition::COMMON_PAGE_SUCCESS_INFO)
+		def self.inte_succ_info
+			self.inte_info(true, Disposition::COMMON_PAGE_SUCCESS, Disposition::COMMON_PAGE_SUCCESS_INFO)
 		end
 
-		def self.integrate_equal_result(info = '')
-			self.integrate_result(true, Disposition::COMMON_PAGE_EQUAL, info)
+		def self.inte_equal_info(info = '')
+			self.inte_info(true, Disposition::COMMON_PAGE_EQUAL, info)
 		end
 
 		def self.chars_zh?(str)

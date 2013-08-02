@@ -27,5 +27,5 @@ get '/login/randomImage' do
 	session[:ash_uid] = 0
   Ash::UtilsModules.load_module_files 'login'
 	Ash::UtilsModules.display_module_outline request.dup, 'view_random_image', params
-	Ash::ModuleApp::LoginView.new.view_random_image(params['l_r_email'], params['l_r_time'])
+	Ash::ModuleApp::LoginView.new.view_random_image(params['l_r_email'])
 end

@@ -11,7 +11,6 @@ verification_change  = ->
 		type: 'GET'
 		data: {
 			'l_r_email': l_u_email
-			'l_r_time': new Date().getTime()
 		}
 	}
 	return
@@ -55,7 +54,6 @@ $(document).ready ->
 				'l_u_email': l_u_email
 				'l_u_pwd': md5(l_u_pwd)
 				'l_u_token': l_u_token
-				'l_u_time': new Date().getTime()
 			}
 		}
 		return true

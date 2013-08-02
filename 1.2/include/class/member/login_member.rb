@@ -2,6 +2,8 @@
 
 exit unless Object.const_defined? :ACCESS_ERROR
 
+require 'digest'
+
 if Object.const_defined? :ASH_DEBUG
 	require "#{MAIN_PATH}include/class/member/member.rb"
 else
@@ -19,14 +21,13 @@ module Ash
 			end
 
 			public
-			def find_member_info
+			def verify_member
 				result = @member_helper.find_all_by_email
-				return result if result.nil?
-				result.member
+				result.member if !result.nil? and result.member.password == @member.password
 			end
 
-			def init_member(email)
-				@member.email = email
+			def init_member(email, pwd)
+				@member.email, @member.password = email, Digest::MD5.hexdigest(pwd)
 				self
 			end
 

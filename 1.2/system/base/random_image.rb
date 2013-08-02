@@ -59,6 +59,7 @@ module Ash
 				@image_draw.draw(@image)
 				@image.border!(1, 1, 'black')
 				@image.write(picture_path)
+				self
 			end
 
 		end
