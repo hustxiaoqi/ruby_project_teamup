@@ -8,10 +8,10 @@ require "#{Ash::Disposition::MAIN_DIR_PLUGIN}register#{File::SEPARATOR}RegisterC
 module Ash
 	module ModuleApp
 		
-		class CViewRegister < Ash::ModuleApp::CView
+		class RegisterView < View
 			
 			def initialize
-				super(Ash::ModuleApp::CControlRegister.new)
+				super(RegisterControl.new)
 			end
 			
 			def default; load_static_file('register.html'); end

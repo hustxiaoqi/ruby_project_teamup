@@ -9,7 +9,16 @@ module Ash
 		COMMON_TOKEN_EXPIRES = 60 * 2
 
 		# active user
-		COMMON_ACTIVE = 128
+		COMMON_ACTIVE = 2 ** 7
+		COMMON_NOT_ACTIVE = 2 ** 6
+
+		# forzen user/team/project
+		COMMON_FORZEN = 2 ** 9
+		COMMON_NOT_FORZEN = 2 ** 8
+
+		# being used
+		COMMON_BEING_USED = 2 * 5
+		COMMON_NOT_BEING_USED = 2 * 4
 
 		# email configuration
 		COMMON_EMAIL_SERVER = 'smtp.163.com'

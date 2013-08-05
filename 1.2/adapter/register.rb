@@ -1,7 +1,6 @@
 #coding: UTF-8
 
 require 'sinatra'
-require 'pp'
 
 get '/register' do
 	#redirect to('/') if session[:ash_uid] != 0

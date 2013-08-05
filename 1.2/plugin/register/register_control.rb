@@ -5,68 +5,56 @@ require 'pp'
 require 'json'
 require 'digest'
 require 'securerandom'
+
+if Object.const_defined? :ASH_DEBUG
+	require "#{MAIN_PATH}system/common/utils_base.rb"
+else
+	require "#{Ash::Disposition::SYS_DIR_COMMON}utils_base.rb"
+end
+
 require "#{Ash::Disposition::SYS_DIR_BASE}BaseControl.rb"
 require "#{Ash::Disposition::MAIN_DIR_INCLUDE_CLASS}RegisterMemberDB.rb"
 require "#{Ash::Disposition::MAIN_DIR_INCLUDE_CLASS}RegisterTeamsDB.rb"
 require "#{Ash::Disposition::SYS_DIR_BASE}BaseSendEmail.rb"
 
-#
-# return
-#   Type = 0 ==> Success
-#   Type = 1 ==> Input Error
-#   Type = 2 ==> Send Email Error
-#   Type = 8 ==> Unable Error
-
 module Ash
 	module ModuleApp
 
-		class CControlRegister < Ash::ModuleApp::CControl
+		class RegisterControl < Control
 			
 			public
 			def ct_verify_register(party_name, email, pwd)
-				party_name, email, pwd = party_name.strip, email.strip, pwd.strip
+				begin
+					party_name, email, pwd = party_name.strip, email.strip, pwd.strip
 
-				return self.integrate_result(false, "Party Name Do Not Empty") unless self.c_party_name? party_name
-				return self.integrate_result(false, "Email Input Error") unless self.c_email? email
-				return self.integrate_result(false, "Password Input Error") unless self.c_password? pwd
-				return self.integrate_result(false, "Email Have Been Used") if self.c_exist_email? email
-				i_value = self.insert_party_info_and_send(party_name, email, pwd)
-				return i_value unless i_value === true
-				#begin
-					#return self.integrate_result(false, "Party Name Do Not Empty") unless self.c_party_name? party_name
-					#return self.integrate_result(false, "Email Input Error") unless self.c_email? email
-					#return self.integrate_result(false, "Password Input Error") unless self.c_password? pwd
-					#return self.integrate_result(false, "Email Have Been Used") if self.c_exist_email? email
-					#i_value = self.insert_party_info_and_send(party_name, email, pwd)
-					#return i_value unless i_value === true
-				#rescue
-					#return self.integrate_result(false, 8, "Unable Error")
-				#end
-				self.integrate_result true, 0, "success"
+					party_name.empty? and return UtilsBase.inte_err_info(2001, "Party Name Not Empty")
+					!UtilsBase.email?(email) and return UtilsBase.inte_err_info(2002, "Email Input Error")
+					!UtilsBase.password?(pwd) and return UtilsBase.inte_err_info(2003, "Password Input Error")
+					rm_helper = RegisterMHeper.new.init_member(email, pwd)
+					rm_helper.exist_email? and return UtilsBase.inte_err_info(2004, "Email Have Been Used")
+					(m_result = self.insert_party(rm_helper, party_name)) === true or return m_result
+					self.send_onverify_email(m_result, party_name, email)
+					UtilsBase.inte_succ_info
+				rescue
+					ASH_MODE == ASH_MODE_DEV and raise
+					UtilsBase.inte_bigerr_info
+				end
 			end
 
 			protected
-			def integrate_result(status = true, type = 1, info); {status: status, info: info, type: type}.to_json; end
-			
-			def c_party_name?(party_name); party_name.length  != 0; end
+			def insert_party(rm_helper, party_name)
+				m_info = rm_helper.insert_briefs
+				m_info.nil? and return UtilsBase.inte_bigerr_info
 
-			def c_email?(email); (/^\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$/ =~ email) == 0; end
+				t_id = RegisterTHeper.new.init_team(m_info.id, party_name).insert_briefs
+				t_id.empty? and return UtilsBase.inte_bigerr_info
+				!rm_helper.update_teams(m_info.id, t_id) and return UtilsBase.inte_bigerr_info
+				m_info
+			end
 
-			def c_password?(pwd); pwd.to_s.length == Digest::MD5.hexdigest('').length; end
+			def send_onverify_email(m_info, party_name, email)
 
-			def c_exist_email?(email); Ash::ExtraDB::CRegisterMembersHelper.new.email?(email); end;
-
-			def insert_party_info_and_send(party_name, email, pwd)
-				member_helper = Ash::ExtraDB::CRegisterMembersHelper.new
-				insert_info = member_helper.insert_brief_member(email, Digest::MD5.hexdigest(pwd), Time.now.to_i.to_s)
-				return {status: false, info: "Unable Error", type: 2}.to_json if insert_info.empty?
-
-				teams_helper = Ash::ExtraDB::CRegisterTeamsHelper.new
-				team_id = teams_helper.create_brief_team(insert_info.first, party_name)
-				return {status: false, info: "Unable Error", type: 2}.to_json if team_id == nil
-				return {status: false, info: "Unable Error", type: 2}.to_json unless member_helper.update_member_teams(insert_info.first, team_id)
-
-				send_info = {party_name: party_name, user_href: "http://127.0.0.1:8080/register/onverify?r_u_email=#{email}&r_u_token=#{insert_info.last}&r_u_type=email"}
+				send_info = {party_name: party_name, user_href: "http://127.0.0.1:8080/register/onverify?r_u_email=#{email}&r_u_token=#{m_info.uuid}&r_u_type=email"}
 				return {status: false, info: "Email Send Error", type: 2}.to_json unless Ash::Utils::CSendEmail.new(email).send_verify_html(send_info)
 				true
 			end
