@@ -48,6 +48,7 @@ module Ash
 						introduction: member['briefIntroduction'] || nil,
 						email: member['email'] || nil,
 						active: member['isActive'] || nil,
+						frozen: member['isFrozen'] || nil,
 						name: member['memberName'] || nil,
 						profile: member['memberProfile'] || nil,
 						uuid: member['memberUUId'] || nil,

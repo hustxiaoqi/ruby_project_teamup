@@ -16,8 +16,11 @@ module Ash
 		COMMON_NOT_ACTIVE = 2 ** 6
 
 		# forzen user/team/project
-		COMMON_FORZEN = 2 ** 9
-		COMMON_NOT_FORZEN = 2 ** 8
+		COMMON_FROZEN = 2 ** 9
+		COMMON_NOT_FROZEN = 2 ** 8
+
+		# reset password time(2 day)
+		COMMON_RESET_PWD_TIME = 2 * 24 * 60 * 60
 
 		# being used
 		COMMON_BEING_USED = 2 * 5

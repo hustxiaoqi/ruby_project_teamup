@@ -32,7 +32,8 @@ module Ash
 					rm_helper = ExtraDB::RegisterMHelper.new.init_member(email: email, password: pwd)
 					rm_helper.exist_email? and return UtilsBase.inte_err_info(2004, "Email Have Been Used")
 					(m_result = self.insert_party(rm_helper, party_name)).is_a?(Struct) or return m_result
-					self.send_onverify_email(m_result, party_name, email)
+					s_info = self.send_onverify_email(m_result, party_name, email)
+					return s_info unless s_info === true
 					UtilsBase.inte_succ_info
 				rescue
 					ASH_MODE == ASH_MODE_DEV and raise

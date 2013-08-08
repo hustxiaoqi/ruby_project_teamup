@@ -37,7 +37,7 @@ module Ash
 
 			def insert_briefs
 				uuid = Digest::SHA1.hexdigest(SecureRandom.uuid)
-				id = @db_helper.insert({briefIntroduction: '', email: @member.email, isActive: Disposition::COMMON_NOT_ACTIVE.to_s, isForzen: Disposition::COMMON_FORZEN.to_s, memberName: '', memberProfile: '', memberUUId: uuid, participatingTeams: [], passwordMD5: Digest::MD5.hexdigest(@member.email), registeredTime: Time.now.to_i.to_s, verifyTime: ''})
+				id = @db_helper.insert({briefIntroduction: '', email: @member.email, isActive: Disposition::COMMON_NOT_ACTIVE.to_s, isFrozen: Disposition::COMMON_NOT_FROZEN.to_s, memberName: '', memberProfile: '', memberUUId: uuid, participatingTeams: [], passwordMD5: Digest::MD5.hexdigest(@member.email), registeredTime: Time.now.to_i.to_s, resetPwdTime: '', verifyTime: ''})
 				id.nil? and return
 				Struct.new(:id, :uuid).new(id.to_s, uuid)
 			end
