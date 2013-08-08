@@ -5,6 +5,9 @@ exit unless Object.const_defined? :ACCESS_ERROR
 module Ash
 	module Disposition
 
+		# website uri
+		COMMON_BASE_URI = 'http://localhost:8080/'
+
 		# 2 (minus)(600(s))
 		COMMON_TOKEN_EXPIRES = 60 * 2
 
@@ -25,6 +28,11 @@ module Ash
 		COMMON_EMAIL_PORT = 25
 		COMMON_EMAIL_FROM_EMAIL = 'chuangwangtower@163.com'
 		COMMON_EMAIL_FROM_PASSWORD = 'hustunique_tower'
+
+		# bae email configuration
+		COMMON_BAE_EMAIL_URI = "http://ashsendemail.duapp.com/"
+		COMMON_BAE_EMAIL_TOKEN = "chuangwang_ruby_project_2013_teamup"
+
 		# 2(day)
 		COMMON_EMAIL_TOKEN_EXPIRES = 2 * 24 * 60 * 60
 		#COMMON_EMAIL_TOKEN_EXPIRES = 10

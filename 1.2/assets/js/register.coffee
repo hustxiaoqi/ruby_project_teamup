@@ -10,7 +10,7 @@ $(document).ready ->
 			type: 'POST'
 			data: {
 				'r_u_party_name': 'chuangwang'
-				'r_u_email': '592030542@qq.com'
+				'r_u_email': 'nashuiliang@gmail.com'
 				'r_u_pwd': md5('123')
 			}
 		}

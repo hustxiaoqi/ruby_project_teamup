@@ -2,8 +2,8 @@
 
 exit unless Object.const_defined? :ACCESS_ERROR
 
-require "#{Ash::Disposition::SYS_DIR_BASE}BaseView.rb"
-require "#{Ash::Disposition::MAIN_DIR_PLUGIN}register#{File::SEPARATOR}RegisterControl.rb"
+require "#{Ash::Disposition::SYS_DIR_CORE}view.rb"
+require "#{Ash::Disposition::MAIN_DIR_PLUGIN}register#{File::SEPARATOR}register_control.rb"
 
 module Ash
 	module ModuleApp
