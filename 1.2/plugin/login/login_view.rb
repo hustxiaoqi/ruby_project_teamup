@@ -2,18 +2,23 @@
 
 exit unless Object.const_defined? :ACCESS_ERROR
 
-require "#{Ash::Disposition::SYS_DIR_CORE}view.rb"
-require "#{Ash::Disposition::MAIN_DIR_PLUGIN}login#{File::SEPARATOR}login_control.rb"
+if Object.const_defined? :ASH_DEBUG
+	require "#{MAIN_PATH}system/core/view.rb"
+	require "#{MAIN_PATH}login/login_control.rb"
+else
+	require "#{Ash::Disposition::SYS_DIR_CORE}view.rb"
+	require "#{Ash::Disposition::MAIN_DIR_PLUGIN}login#{ASH_SEP}login_control.rb"
+end
 
 module Ash
 	module ModuleApp
-		
-		class LoginView < Ash::ModuleApp::View
-			
+
+		class LoginView < View
+
 			def initialize
 				super(Ash::ModuleApp::LoginControl.new)
 			end
-			
+
 			def default; self.load_static_file('login.html'); end
 
 			def view_verify_login(*args); @api.ct_verify_login(*args); end
