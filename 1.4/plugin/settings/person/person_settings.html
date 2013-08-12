@@ -1,0 +1,82 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<link href="/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+		<link href="/bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet" />
+		<link href="/css/login.css" rel="stylesheet" />
+		<script language="Javascript" type="text/javascript" src="/js/jQuery2.0.2.min.js"></script>
+		<script language="Javascript" type="text/javascript" src="/bootstrap/js/bootstrap.min.js"></script>
+		<script language="Javascript" type="text/javascript" src="/js/md5.js"></script>
+	</head>
+
+	<body>
+		<div class="h_details row">
+			<div class="span4"></div>
+			<div class="span4">
+				<div class="l_form-body">
+					<!--<form class="form-horizontal" id="l_form" action="/login" method="post">-->
+					<div class="form-horizontal" id="l_form" >
+						<div class="control-group">
+							<label class="control-label">Photo</label>
+							<div class="controls">
+								<form action="/settings/person/photo" method="post" enctype="multipart/form-data">
+									<div class="fileupload fileupload-exists" data-provides="fileupload">
+										<div class="fileupload-preview fileupload-exists thumbnail" style="width: 100px; height: 100px;">
+											<img src="<%=photo%>"/>
+										</div>
+										<div>
+											<span class="btn btn-file">
+												<span class="fileupload-exists">Change</span>
+												<input type="file"/>
+											</span>
+											<!--<a href="#" class="btn fileupload-exists" data-dismiss="fileupload">Remove</a>-->
+										</div>
+									</div>
+									<input type="submit" name="submit" value="submit"/>
+								</form>
+							</div>
+						</div>
+						<div class="control-group">
+							<label class="control-label">Email</label>
+							<div class="controls">
+								<input type="text" class="span3 disabledInput" placeholder="<%=email%>" disabled/>
+							</div>
+						</div>
+						<div class="control-group">
+							<label class="control-label" for="s_p_m_name">Username</label>
+							<div class="controls">
+								<input type="text" class="span3" <%unless result.first.empty?%>value="<%=result.first%>"<%end%> id="s_p_m_name" placeholder="username" required/>
+							</div>
+						</div>
+						<div class="control-group">
+							<label class="control-label" for="s_p_m_brief">brief Introduction</label>
+							<div class="controls">
+								<textarea class="span4" id="s_p_m_brief" placeholder="brief Introduction" rows="4" style="resize: none;"><% unless result[1].empty?%><%=result[1]%><%end%></textarea>
+							</div>
+						</div>
+						<div class="control-group">
+							<label class="control-label">Change Password</label>
+							<div class="controls">
+								<a href="#" class="btn btn-link">Click Change Pasword</a>
+							</div>
+						</div>
+						<div class="control-group">
+							<div class="controls">
+								<button type="button" id="s_submit" class="btn">Submit</button>
+								<button type="button" id="s_cancel" class="btn btn-link">Cancel</button>
+							</div>
+						</div>
+
+					</div>
+				</div>
+			</div>
+			<div class="span4"></div>
+		</div>
+		<script language="javascript" type="text/javascript" src="/js/person_settings.js"></script>
+	</body>
+
+</html>

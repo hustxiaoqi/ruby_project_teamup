@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<link href="/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+		<link href="/bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet" />
+		<link href="/css/login.css" rel="stylesheet" />
+		<script language="Javascript" type="text/javascript" src="/js/jQuery2.0.2.min.js"></script>
+		<script language="Javascript" type="text/javascript" src="/bootstrap/js/bootstrap.min.js"></script>
+		<script language="Javascript" type="text/javascript" src="/js/md5.js"></script>
+	</head>
+
+	<body>
+		
+		<div class="l_top" style="height: 70px;">
+		</div>
+		<div class="l_main container span4 offset4">
+			<div class="l_container">
+				<div class="l_form-body">
+					<div class="l_tab">
+						<div style="float: left;"><a href="#"><img src="/image/login/Login_tab.png"></a></div>
+						<div><a href="#"><div class="l_signup"></div></a></div>
+					</div>
+					<div><hr /></div>
+					<div class="" id="l_form">
+						<div class="control-group">
+							<div class="controls">
+								<div class="input-prepend">
+									<img src="/image/login/user.png" />
+									<input type="text" id="l_u_email" placeholder="email" style="height: 35px; width: 226px;"/>
+								</div>
+							</div>
+						</div>
+						<div class="control-group">
+							<div class="controls">
+								<div class="input-prepend">
+									<img src="/image/login/password.png" />
+									<input type="password" id="l_u_pwd" placeholder="password" style="height: 35px; width: 226px;"/>
+								</div>
+							</div>
+						</div>
+						<div class="control-group">
+							<div class="controls" id="l_u_verif">
+								<input type="text" id="l_u_verif" placeholder="Code" style="height: 35px; width: 136px;"/>
+								<a href="#" id="l_u_verif_a">点击获得验证码</a>
+								<!--<input type="password" id="l_u_pwd" placeholder="Password" />-->
+							</div>
+						</div>
+						<div class="control-group">
+							<div class="controls">
+								<!--<input type="submit" name="l_submit" class="btn" value="Sign in" />-->
+								<button type="button" id="l_submit"></button>
+							</div>
+						</div>
+
+					</div>
+				</div>
+				<div class="alert" id="l_alert" style="display: none;margin-top: 4px;margin-left: 18px; box-shadow: 0 1px 1px;">
+					<button type="button" class="close" data-dismiss="alert">&times;</button>
+					<p id="l_err">error</p>
+				
+				</div>
+			</div>
+		</div>
+
+		<script language="Javascript" type="text/javascript" src="/js/login.js"></script>
+
+	</body>
+
+</html>

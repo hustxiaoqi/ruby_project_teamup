@@ -1,0 +1,84 @@
+/*.l_form-header{*/
+/*background-color: #6c8393;*/
+/*color: #FFFFFF;*/
+/*margin-left: 20px;*/
+/*margin-top: 10px;*/
+/*padding: 10px 20px;*/
+/*text-shadow: 0 -1px 0 rgba(0,0,0,0.5);*/
+/*border-radius: 5px 5px 0 0;*/
+/*height: 55px;*/
+/*}*/
+
+/*.l_form-body{*/
+/*border: 1px solid #d8dee2;*/
+/*padding: 20px 3px;*/
+/*padding-top: 46px;*/
+/*padding-left: 0px;*/
+/*margin-left: 19px;*/
+/*box-shadow: 0 1px 3px rgba(0,0,0,0.075);*/
+/*}*/
+
+/*.l_left{*/
+/*float: left;*/
+/*width: 50%;*/
+/*position: absolute;*/
+/*height: 100%;*/
+/*}*/
+
+/*.l_right{*/
+/*float: left;*/
+/*width: 50%;*/
+/*height: 100%;*/
+/*position: absolute;*/
+/*margin-left: 50%;*/
+/*}*/
+
+body{
+	background-color: rgb(14,114,144);
+}
+
+.l_container{
+	background: url("/image/login/body.png") no-repeat;
+	padding-top: 20px;
+	height: 600px;
+}
+.l_form-body{
+	margin-top: 140px;
+	margin-left: 20px;
+}
+.l_change{
+	margin-top: 20px;
+}
+#l_submit{
+	background: url("/image/login/login.png") no-repeat;
+	width: 280px;
+	height: 49px;
+	border: 0;
+	margin-top: 15px;
+}
+#l_form{
+	margin-left: 10px;
+}
+.l_tab{
+	padding-top: 12px;
+}
+.l_signup{
+	width: 80px;
+	background-image: url("/image/signup/SignUp_tab.png");
+	height: 80px;
+	margin-left: 85px;
+	background-repeat: no-repeat;
+	background-position: 0px 28px;
+}
+hr{
+	margin-top: 0px;
+	margin-left: -11px;
+	margin-right: 35px;
+}
+.l_input{
+	height: 35px;
+	width: 240px;
+}
+#l_u_verif_a{
+	margin-left: 12px;
+}
